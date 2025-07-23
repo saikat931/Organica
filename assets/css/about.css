@@ -1,0 +1,14 @@
+ 
+  .about.product .grid-list { grid-template-columns: repeat(6, 1fr); padding-bottom: 20px;}
+
+
+@media (min-width: 1200px) {
+
+  /**
+   * REUSED STYLE
+   */
+
+
+ .about .container { max-width: 1800px; }
+
+}
