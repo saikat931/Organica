@@ -11,6 +11,13 @@
 
     h2>i am a good boy
     </h2>
-    
+
+    <!-- git checkout master
+
+
+git add .
+git commit -m "Your commit message"
+git push origin master -->
+
 </body>
 </html>
