@@ -1,40 +1,61 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $name     = $_POST['name'];
-    $email    = $_POST['email'];
-    $phone    = $_POST['phone'];
-    $aadhaar  = $_POST['aadhaar'];
+
+$target_dir = "vendor_images/";
+$uploadOk = 1;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $aadher = $_POST['aadhar']; // ✅ Fixed: $_post ➜ $_POST
 
     // Handle file upload
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $imageName = $_FILES['image']['name'];
-        $imageTmp  = $_FILES['image']['tmp_name'];
-        $imageExt  = pathinfo($imageName, PATHINFO_EXTENSION);
-        $imageNew  = uniqid('rest_', true) . '.' . $imageExt;
+        $imageTmp = $_FILES['image']['tmp_name'];
+        $imageSize = $_FILES['image']['size'];
+        $imageFileType = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
 
-        $uploadDir = 'uploads/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+        // ✅ Use uniqid() not "unique" (which doesn't exist in PHP)
+        $imageId = uniqid('rest_', true) . '.' . $imageFileType;
+        $imagePath = $target_dir . $imageId;
+
+        // ✅ Check if file already exists
+        if (file_exists($imagePath)) {
+            echo "Sorry, file already exists.<br>";
+            $uploadOk = 0;
         }
 
-        $imagePath = $uploadDir . $imageNew;
-        move_uploaded_file($imageTmp, $imagePath);
+        // ✅ Check file size (limit: ~500KB)
+        if ($imageSize > 500000) {
+            echo "Sorry, your file is too large.<br>";
+            $uploadOk = 0;
+        }
+
+        // ✅ Check allowed file types
+        $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($imageFileType, $allowed)) {
+            echo "Invalid file type. Only JPG, JPEG, PNG, GIF allowed.<br>";
+            $uploadOk = 0;
+        }
+
+        // ✅ Upload file if checks pass
+        if ($uploadOk == 1) {
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0755, true);
+            }
+
+            if (move_uploaded_file($imageTmp, $imagePath)) {
+                echo "Successfully Uploaded.<br>";
+                // You can now store $name, $email, etc. in the DB
+            } else {
+                echo "There was an error uploading the file.<br>";
+            }
+        } else {
+            echo "Sorry, Upload Failed.<br>";
+        }
     } else {
-        echo "Image upload failed!";
-        exit;
-    }
-
-    // Save to database (example)
-    try {
-        $pdo = new PDO("mysql:host=localhost;dbname=your_database", "your_user", "your_password");
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $stmt = $pdo->prepare("INSERT INTO restaurants (name, email, phone, aadhaar, image_path) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $email, $phone, $aadhaar, $imagePath]);
-
-        echo "Restaurant registered successfully!";
-    } catch (PDOException $e) {
-        echo "Database error: " . $e->getMessage();
+        echo "No file uploaded or file error.<br>";
     }
 }
 ?>
