@@ -1,6 +1,7 @@
 <?php
     session_start();
 
+    $message = "";
     $target_dir = "vendor_images/";
     // $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
@@ -20,25 +21,36 @@
             $imageTmp = $_FILES['image']['tmp_name'];
             $imageSize = $_FILES['image']['size'];
             $imageFileType = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
-            $imageId = uniqid('rest_', true) . '.' . $imageFileType;
+            $imageId = uniqid('ven_', true) . '.' . $imageFileType;
             $imagePath = $target_dir . $imageId;
 
             // Check if file already exists
-            if(file_exists($imagePath)){
-                $_SESSION['message'] = "Sorry, file already exits";
+            $uploadedHash = md5_file($imageTmp);
+        $files = scandir($target_dir);
+
+        foreach ($files as $file) {
+            if (in_array($file, ['.', '..'])) continue;
+
+            $existingPath = $target_dir . $file;
+
+            if (is_file($existingPath) && md5_file($existingPath) === $uploadedHash) {
+                $message = "This image has already been uploaded.";
                 $uploadOk = 0;
-            };
+                break;
+            }
+        }
+
 
             //check file size
             if($imageSize > 500000){
-                $_SESSION['message'] = "Sorry, your file is too large";
+                $message = "Sorry, your file is too large.";
                 $uploadOk = 0;
             };
 
             // check file type
-            $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+            $allowed = ['jpg', 'jpeg','png', 'gif'];
             if(!in_array($imageFileType, $allowed)){
-                $_SESSION['message'] = "Invalid file type";
+                $message = "Invalid file type. Only JPG, JPEG, and GIF are allowed.";
                 $uploadOk = 0;
             };
 
@@ -52,16 +64,17 @@
             if($uploadOk == 1){
                 
                 move_uploaded_file($imageTmp, $imagePath);
-                $_SESSION['message'] = " Sucessfully Uploaded";
-                
-            }else{
-                $_SESSION['message'] = "Sorry, Upload Failed";
-                exit();
-            };
-        };
+                $message = "Successfully uploaded.";
+            } 
+            // }else{
+            //     $message = "Sorry, there was an error uploading your file.";
+            // };
+        }else{
+            $message = "Please upload a valid image file.";
+        }
     // Redirect to avoid resubmission
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
+    // header("Location: " . $_SERVER['PHP_SELF']);
+    // exit();
     };
     
 ?>
@@ -78,26 +91,28 @@
 <body>
     
     <h2>Restaurant Registration Form</h2>
-    <form action="register.php" method="post" enctype="multipart/form-data">
+    <form action="/vendor/register.php/" method="post" enctype="multipart/form-data">
         <label for="name">Reataurent Name</label>
-        <input type="text" name="name" requred><br><br>
+        <input type="text" name="name" required><br><br>
 
         <label for="email">Email:</label>
-        <input type="email" name="email" requred><br><br>
+        <input type="email" name="email" required><br><br>
 
         <label for="phone">Phone Number:</label>
-        <input type="text" name="phone" requred><br><br>
+        <input type="text" name="phone" required><br><br>
 
         <label for="aadhar">Aadhaar Number:</label>
-        <input type="text" name="aadhar" requred><br><br>
+        <input type="text" name="aadhar" required><br><br>
 
         <label for="image">Restaurant Image:</label>
-        <input type="file" name="image" accept="image/*" requred><br><br>
+        <input type="file" name="image" accept="image/*" required><br><br>
 
         <button type="submit">Submit</button>
     </form>
-    <?php if (isset($_SESSION['message'])): ?>
-    <p style="color: green;"><?php echo $_SESSION['message']; unset($_SESSION['message']); ?></p>
-    <?php endif; ?>
+    <?php if (!empty($message)): ?>
+    <p style="color: <?= strpos($message, 'Success') !== false ? 'green' : 'red' ?>;">
+        <?= htmlspecialchars($message) ?>
+    </p>
+<?php endif; ?>
 </body>
 </html>
