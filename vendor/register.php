@@ -1,4 +1,6 @@
 <?php
+
+    require_once '../config/db_config.php';
     session_start();
 
     $message = "";
@@ -8,10 +10,10 @@
     // $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $aadher = $_POST['aadhar'];
+        $name = htmlspecialchars(trim($_POST['name']));
+        $email = htmlspecialchars(trim($_POST['email']));
+        $phone = htmlspecialchars(trim($_POST['phone']));
+        $aadhear = htmlspecialchars(trim($_POST['aadhar']));
     
 
         //handle file upload
@@ -26,9 +28,9 @@
 
             // Check if file already exists
             $uploadedHash = md5_file($imageTmp);
-        $files = scandir($target_dir);
+            $files = scandir($target_dir);
 
-        foreach ($files as $file) {
+            foreach ($files as $file) {
             if (in_array($file, ['.', '..'])) continue;
 
             $existingPath = $target_dir . $file;
@@ -65,18 +67,30 @@
                 
                 move_uploaded_file($imageTmp, $imagePath);
                 $message = "Successfully uploaded.";
+
+                try {
+                    $sql = "INSERT INTO vendors_register(name, email, phone, aadhar, image_path) VALUES (?, ?, ?, ?, ?)";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([$name, $email, $phone, $aadhar, $imagePath]);
+                    echo 'Data inserted successfully';
+                } catch (PDOException $e) {
+                    echo 'Insert failed: ' . $e->getMessage();
+                }
+
             } 
-            // }else{
-            //     $message = "Sorry, there was an error uploading your file.";
-            // };
+            }else{
+                $message = "Sorry, there was an error uploading your file.";
+            };
         }else{
             $message = "Please upload a valid image file.";
         }
     // Redirect to avoid resubmission
     // header("Location: " . $_SERVER['PHP_SELF']);
     // exit();
-    };
     
+    
+   
+    $conn = null;
 ?>
 
 
@@ -86,13 +100,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Registration</title>
+    <title>Vendor Registration</title>
 </head>
 <body>
     
     <h2>Restaurant Registration Form</h2>
     <form action="/vendor/register.php/" method="post" enctype="multipart/form-data">
-        <label for="name">Reataurent Name</label>
+        <label for="name">Vendor Name</label>
         <input type="text" name="name" required><br><br>
 
         <label for="email">Email:</label>

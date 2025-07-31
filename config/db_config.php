@@ -24,7 +24,7 @@ $dsn = sprintf(
 
 try {
     // Create a PDO instance (connect to the database)
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, $pdoOptions);
+    $conn = new PDO($dsn, DB_USER, DB_PASS, $pdoOptions);
     // echo " hello user Connection successful!";
 } catch (PDOException $e) {
     // Handle connection errors (in production, log this instead of displaying)
