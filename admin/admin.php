@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once '../config/db_config.php';
+
 // Check if the user is logged in, otherwise redirect to the login page
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
