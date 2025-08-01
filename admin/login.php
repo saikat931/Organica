@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Prepare the SQL query to check the username
-        $stmt = $pdo->prepare('SELECT * FROM admins WHERE username = :username');
+        $stmt = $conn->prepare('SELECT * FROM admins WHERE username = :username');
         $stmt->execute(['username' => $username]);
         
         // Fetch the user record from the database
