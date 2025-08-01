@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // Check if the username or email already exists in the database
-            $stmt = $pdo->prepare('SELECT COUNT(*) FROM admins WHERE username = :username OR email = :email');
+            $stmt = $conn->prepare('SELECT COUNT(*) FROM admins WHERE username = :username OR email = :email');
             $stmt->execute(['username' => $username, 'email' => $email]);
             $userExists = $stmt->fetchColumn();
 
@@ -34,13 +34,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Username or email already exists.';
             } else {
                 // Insert the new admin into the database, including the admin_role
-                $stmt = $pdo->prepare('INSERT INTO admins (username, email, password, admin_role) VALUES (:username, :email, :password, :admin_role)');
+                $stmt = $conn->prepare('INSERT INTO admins (username, email, password, admin_role) VALUES (:username, :email, :password, :admin_role)');
                 $stmt->execute([
                     'username' => $username,
                     'email' => $email,
                     'password' => $hashedPassword,
                     'admin_role' => $admin_role
                 ]);
+
+                // $sql = "INSERT INTO admins(username, email, password, admin_role) VALUES (?, ?, ?, ?)";
+                // $stmt = $conn->prepare($sql);
+                // $stmt->execute([$username, $email, $hashedPassword, $admin_role]);
+                // $stmt->execute([
+                //     'username' => $username,
+                //     'email' => $email,
+                //     'password' => $hashedPassword,
+                //     'admin_role' => $admin_role
+                // ]);
 
                 // Redirect to the login page after successful registration
                 header('Location: login.php');
@@ -61,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Registration</title>
-    <!-- <link rel="stylesheet" href="../assets/css/admin.css"> -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -350,7 +360,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="username">Username</label>
                     <div class="input-container">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="username" name="username" name="username" class="form-control"
+                        <input type="text" id="username" name="username" class="form-control"
                             placeholder="Enter your username" value="<?php echo htmlspecialchars($username ?? ''); ?>"
                             required>
                     </div>
@@ -503,7 +513,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // If validation passes, submit the form
                 alert('Form submitted successfully!');
                 // In a real application, you would submit to server here
-                // this.submit();
+                this.submit();
             });
         </script>
 
