@@ -508,8 +508,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     return;
                 }
 
-                // More validations can be added here
-
                 // If validation passes, submit the form
                 alert('Form submitted successfully!');
                 // In a real application, you would submit to server here
