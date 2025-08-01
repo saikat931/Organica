@@ -142,6 +142,11 @@
     }
 
     .data-table button:first-child {
+      background-color: #5f6e60;
+      color: white;
+    }
+
+    .data-table button:nth-child(2) {
       background-color: #4CAF50;
       color: white;
     }

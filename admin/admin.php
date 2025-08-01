@@ -68,7 +68,7 @@ $username = $_SESSION['username'];
             <tr><th>Name</th><th>Status</th><th>Location</th><th>Actions</th></tr>
           </thead>
           <tbody>
-            <tr><td>Pizza Palace</td><td>Active</td><td>Delhi</td><td><button>Details</button><button>Delete</button></td></tr>
+            <tr><td>Pizza Palace</td><td>Active</td><td>Delhi</td><td><button>Details</button><button>Accept</button><button>Delete</button></td></tr>
           </tbody>
         </table>
       </section>
