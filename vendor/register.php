@@ -115,7 +115,7 @@
     .v-r-from{
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
-      filter: brightness(75%);
+      filter: brightness(85%);
     }
     .form-container {
       background: rgba(255, 255, 255, 0.25); /* more transparent white *//* Transparent white */
