@@ -20,6 +20,7 @@
   -->
   <link rel="stylesheet" href= "./assets/css/main.css">
   <link rel="stylesheet" href= "./assets/css/home.css">
+  <link rel="stylesheet" href= "./assets/css/header.css">
   <link rel="stylesheet" href= "./assets/css/about.css">
 
   <!-- 
@@ -30,6 +31,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;500;700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     
 
@@ -127,6 +129,16 @@
             <data class="btn-badge" value="2">02</data>
           </button>
 
+          <button
+              class="header-action-btn"
+              aria-label="Open shopping user"
+              data-panel-btn="user"
+            >
+              <ion-icon name="person-outline"></ion-icon>
+
+              <!-- <data class="btn-badge" value="2">02</data> -->
+            </button>
+
         </div>
 
       </div>
@@ -142,6 +154,7 @@
 
   <aside class="aside">
 
+    <!-- whishlist  -->
     <div class="side-panel" data-side-panel="whishlist">
 
       <button class="panel-close-btn" aria-label="Close whishlist" data-panel-btn="whishlist">
@@ -224,6 +237,8 @@
 
     </div>
 
+
+    <!-- cart  -->
     <div class="side-panel" data-side-panel="cart">
 
       <button class="panel-close-btn" aria-label="Close cart" data-panel-btn="cart">
@@ -284,6 +299,100 @@
       <a href="./cart.html" class="panel-btn">View Cart</a>
 
     </div>
+
+    <!-- user  -->
+    <div class="side-panel" data-side-panel="user">
+        <button
+          class="panel-close-btn"aria-label="Close user"data-panel-btn="user"><ion-icon name="close-outline"></ion-icon></button>
+
+        <div class="card">
+          <!-- Top bar -->
+          <div class="user-top-bar">
+            <button aria-label="Back">
+              <i class="fas fa-chevron-left text-lg"></i>
+            </button>
+            <h1>Profile</h1>
+          </div>
+          <!-- Profile image -->
+          <div class="profile">
+            <div class="profile-img">
+              <img
+                src="https://storage.googleapis.com/a1aa/image/b6cb3d28-e565-41ab-f8de-14156d6b21f1.jpg"
+                alt="Portrait of a smiling man"
+              />
+              <button aria-label="Edit profile picture">
+                <i class="fas fa-camera text-sm"></i>
+              </button>
+            </div>
+            <h2>Roan Atkinson</h2>
+            <p>Entrepreneur</p>
+          </div>
+          <!-- Pink wave -->
+          <div class="wave">
+            <img src="./assets/images/header-user.png" alt="wave background" />
+          </div>
+
+          <!-- Content -->
+          <div class="content">
+            <h3>My Orders</h3>
+            <div class="orders">
+              <div>
+                <img
+                  src="https://storage.googleapis.com/a1aa/image/81aec5e8-ebd5-46f2-13d9-b90b57c9afd0.jpg"
+                  alt="Pending Payment"
+                /><span>Pending Payment</span>
+              </div>
+              <div>
+                <img
+                  src="https://storage.googleapis.com/a1aa/image/556e2dd0-2f3f-4f7c-8c0c-166dbb8c556a.jpg"
+                  alt="Delivered"
+                /><span>Delivered</span>
+              </div>
+              <div>
+                <img
+                  src="https://storage.googleapis.com/a1aa/image/845ffc99-4b4f-4233-1c34-c85faa2b1a4c.jpg"
+                  alt="Processing"
+                /><span>Processing</span>
+              </div>
+              <div>
+                <img
+                  src="https://storage.googleapis.com/a1aa/image/31d0c8cb-d1fe-4741-ecfe-ad973e42a3cd.jpg"
+                  alt="Cancelled"
+                /><span>Cancelled</span>
+              </div>
+              <div>
+                <img
+                  src="https://storage.googleapis.com/a1aa/image/92c94298-8df4-4d0d-e060-b7f69c30130d.jpg"
+                  alt="Wishlist"
+                /><span>Wishlist</span>
+              </div>
+              <div>
+                <img
+                  src="https://storage.googleapis.com/a1aa/image/a574cf4c-baa5-48d8-6dac-31671008f570.jpg"
+                  alt="Customer Care"
+                /><span>Customer Care</span>
+              </div>
+            </div>
+            <div class="settings">
+              <button aria-label="Edit Profile">
+                <div><i class="fas fa-user"></i><span>Edit Profile</span></div>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button aria-label="Shipping Address">
+                <div>
+                  <i class="fas fa-map-marker-alt"></i
+                  ><span>Shipping Address</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <button class="logout" type="button">
+            <span>Logout</span><i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+    </div>
+     
 
   </aside>
 

@@ -1,0 +1,183 @@
+/* .user {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #d1d5db, #e5e7eb);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    } */
+.card {
+  background: #fff;
+  border-radius: 1.5rem;
+  /* max-width: 20rem; */
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.user-top-bar {
+  background-color: var(--shamrock-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+.user-top-bar button {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  color: #4b5563;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.user-top-bar button:hover {
+  color: #1f2937;
+}
+.user-top-bar h1 {
+  color: var(--white);
+  font-size: var(--fs-6);
+  font-weight: 400;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+.profile-img {
+  position: relative;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-img button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 50%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transform: translate(132%, -75%);
+  cursor: pointer;
+}
+.profile h2 {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 15px;
+}
+.profile p {
+  margin-top: 0.25rem;
+  color: #9ca3af;
+  font-size: 12px;
+}
+.wave {
+  position: relative;
+  margin-top: 2.5rem;
+  min-height: 140px;
+}
+
+.wave img {
+  display: block;
+  width: 100%;
+  height: 20rem; /* same as h-20 in Tailwind (80px) */
+  margin-top: -83px;
+  object-fit: cover; /* makes sure it stretches nicely */
+}
+
+.content {
+  /* padding: 1.5rem; */
+  padding-bottom: 2rem;
+  background: #fff;
+  position: relative;
+  margin-top: -2.5rem;
+  z-index: 30;
+}
+.content h3 {
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 1.5rem;
+}
+.orders {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem 0;
+  text-align: center;
+  font-size: 11px;
+  color: #4b5563;
+}
+.orders div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+.orders img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50px;
+}
+.settings {
+  margin-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #4b5563;
+  
+}
+.settings button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-size: 12px;
+}
+.settings button div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.settings i {
+  color: #9ca3af;
+  font-size: 1rem;
+}
+.logout {
+  width: 100%;
+  text-align: center;
+  color: #000000;
+  font-size: 14px;
+  padding: 1rem 0;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
