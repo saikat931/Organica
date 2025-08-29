@@ -305,7 +305,7 @@ window.addEventListener('storage', function(event) {
 
 
   // vendor-request 
-  ggggggg
+  
 
   </script>
 </body>
