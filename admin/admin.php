@@ -60,6 +60,8 @@ $username = $_SESSION['username'];
         </div>
       </section>
 
+      <!-- vendor  -->
+
       <section id="vendor" class="section">
         <h1>Vendor Management</h1>
         <button class="add-btn">+ Add Vendor</button>
@@ -72,6 +74,40 @@ $username = $_SESSION['username'];
           </tbody>
         </table>
       </section>
+
+        <!-- vendor popup -->
+
+      <div class="vendor-request">
+        <div class="vendor-request-popup">
+    <div class="vendor-request-header">
+      <div class="badge">PRO</div>
+      <div class="avatar">
+        <img src="https://storage.googleapis.com/a1aa/image/33f1439f-44a1-4644-c04a-5593306cd8eb.jpg" alt="Portrait of a smiling young woman">
+      </div>
+      <h2 class="name">Ricky Park</h2>
+      <p class="location">NEW YORK</p>
+      <p class="bio">User interface designer and front-end developer</p>
+      <div class="buttons">
+        <button class="btn btn-message">Message</button>
+        <button class="btn btn-follow">Following</button>
+      </div>
+    </div>
+    <div class="vendor-request-footer">
+      <p class="skills-title">Skills</p>
+      <div class="skills">
+        <span class="skill">UI / UX</span>
+        <span class="skill">Front End Development</span>
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+        <span class="skill">Node</span>
+      </div>
+    </div>
+  </div>
+      </div>
+
+      <!-- user  -->
 
       <section id="delivery" class="section">
         <h1>Delivery Partner Management</h1>
@@ -265,6 +301,11 @@ window.addEventListener('storage', function(event) {
 
 
         });
+
+
+
+  // vendor-request 
+  ggggggg
 
   </script>
 </body>
